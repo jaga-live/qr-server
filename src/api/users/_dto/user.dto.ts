@@ -42,3 +42,13 @@ export class UserProfileDto{
     email: string
 
 }
+
+
+/////PATCH
+export class EditUserDto{
+
+    @IsOptional()
+    @IsString()
+    name: string
+
+}
