@@ -1,6 +1,6 @@
 
 import { Exclude } from "class-transformer"
-import {IsNotEmpty, IsString, IsEmail} from "class-validator"
+import {IsNotEmpty, IsString, IsEmail, IsOptional, IsArray} from "class-validator"
 import { Types } from "mongoose"
 
 
@@ -19,6 +19,14 @@ export class CreateUserDto{
     @IsNotEmpty()
     @IsString()
     password: string
+
+    @IsNotEmpty()
+    @IsString()
+    role: string
+
+    @IsOptional()
+    @IsArray()
+    roles: [string]
 
 }
 

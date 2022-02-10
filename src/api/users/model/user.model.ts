@@ -12,6 +12,9 @@ export class User{
     @Prop()
     password: string
 
+    @Prop()
+    roles: Array<string>
+
     @Prop({type: Object})
     twoFactorAuth: Object
 

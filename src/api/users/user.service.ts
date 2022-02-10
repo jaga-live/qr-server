@@ -12,7 +12,9 @@ export class UserService {
     constructor(
         @InjectModel('users') private readonly userModel: Model<User>
     ) { }
+
     
+////CREATE
     ///Add a user
     async add_user(payload: CreateUserDto) {
         
@@ -20,15 +22,32 @@ export class UserService {
         if (doesUserExist) throw new ConflictException('User Already Exists')
         
         payload.password = hashSync(payload.password, 12)
+        payload.roles = [payload.role]
+
         await this.userModel.insertMany(payload)
 
 
-        ////Response
+        ////Response Data
         delete payload.password
         return {
             ...payload
         }
     
+    }
+
+
+
+///////VIEW
+    /////User Profile
+    async user_profile(userId: Types.ObjectId) {
+
+        var user = await this.userModel.findOne({ _id: userId }, {
+            password: 0,
+            jwt: 0,
+            mobileJwt: 0,
+            twofactorAuth: 0
+        })
+        return user
     }
 
     ////View a single User by email
