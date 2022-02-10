@@ -3,10 +3,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './core/exception';
 
-async function bootstrap() {
+async function server() {
 
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('v1')
+  app.setGlobalPrefix('v1', {
+    exclude: ['/']
+  })
 
   ///Global Config
   app.useGlobalFilters(new AllExceptionsFilter())
@@ -17,4 +19,4 @@ async function bootstrap() {
 
 
 }
-bootstrap();
+server();

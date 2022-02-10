@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './api/auth/auth.module';
 import { UserModule } from './api/users/user.module';
+import { AppController } from './app.controller';
 
 
 
@@ -16,7 +17,7 @@ import { UserModule } from './api/users/user.module';
     UserModule,
     AuthModule
   ],
-  controllers: [],
+  controllers: [ AppController],
   providers: [],
 })
   
