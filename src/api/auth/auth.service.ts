@@ -42,7 +42,8 @@ export class AuthService{
 
         return {
             _id: isUserValid._id,
-            token: jwt
+            token: jwt,
+            roles: isUserValid.roles
         }
 
     }
