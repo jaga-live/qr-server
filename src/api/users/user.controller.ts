@@ -6,12 +6,13 @@ import { JwtGuard } from "../auth/guards/jwt.guard";
 import { RolesGuard } from "../auth/guards/role.guard";
 import { UserService } from "./user.service";
 import { CreateUserDto, EditUserDto } from "./_dto/user.dto";
+import * as speakeasy from "speakeasy"
 
 
 @Controller('user')
 export class UserController{
     constructor(
-        private readonly userService: UserService
+        private readonly userService: UserService,
     ) { }
     
 
@@ -76,6 +77,29 @@ export class UserController{
     ) {
 
         return this.userService.delete_user(userId)
-    }    
+    }  
+    
+
+
+    /////Verify test
+    @UseGuards(JwtGuard, RolesGuard)
+    @Roles(Role.ADMIN, Role.EMPLOYEE)
+    @Post('verify')
+    async verify(
+        @Req() req: any,
+        @Body('token') token: string
+    ) {
+
+        var user: any = await this.userService.view_user_by_id(req.user._id)
+
+        var isVerified = speakeasy.totp.verify({
+            secret: user.twoFactorAuth.totp,
+            encoding: 'base32',
+            token
+        })
+
+        console.log(isVerified)
+
+    }
 
  }

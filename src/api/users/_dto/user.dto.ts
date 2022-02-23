@@ -28,6 +28,9 @@ export class CreateUserDto{
     @IsArray()
     roles: [string]
 
+    @IsOptional()
+    twoFactorAuth: any
+
 }
 
 

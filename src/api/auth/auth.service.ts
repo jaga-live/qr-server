@@ -2,11 +2,11 @@ import { BadRequestException, Get, Injectable, Req, UseGuards } from "@nestjs/co
 import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import { compareSync } from "bcrypt";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { v4 } from "uuid";
 import { User } from "../users/model/user.model";
 import { UserService } from "../users/user.service";
-import { JwtGuard } from "./guards/jwt.guard";
+import * as speakeasy from "speakeasy"
 
 
 @Injectable()
@@ -47,6 +47,24 @@ export class AuthService{
             role: isUserValid.roles[0]
         }
 
+    }
+
+
+
+
+
+    ///////////TOTP (Time Based One-time Password)
+    async verify_totp_user(userId: Types.ObjectId, token: string) {
+
+        var user: any = await this.userService.view_user_by_id(userId)
+
+        var isVerified = speakeasy.totp.verify({
+            secret: user.twoFactorAuth.totp,
+            encoding: 'base32',
+            token
+        })
+
+        return isVerified
     }
 
 

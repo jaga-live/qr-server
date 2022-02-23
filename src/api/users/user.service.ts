@@ -5,7 +5,7 @@ import { classToPlain } from "class-transformer";
 import { Model, Types } from "mongoose";
 import { User } from "./model/user.model";
 import { CreateUserDto, EditUserDto, UserProfileDto } from "./_dto/user.dto";
-
+import * as speakeasy from "speakeasy"
 
 @Injectable()
 export class UserService {
@@ -24,11 +24,18 @@ export class UserService {
         payload.password = hashSync(payload.password, 12)
         payload.roles = [payload.role]
 
-        await this.userModel.insertMany(payload)
-
-
+        
+        /////Generate Secret
+        var secret = speakeasy.generateSecret()
+        
+        payload.twoFactorAuth = {
+            totp: secret.base32
+        }
+        // await this.userModel.insertMany(payload)
+        console.log(secret)
         ////Response Data
         delete payload.password
+        delete payload.twoFactorAuth
         return {
             ...payload
         }

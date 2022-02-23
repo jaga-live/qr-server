@@ -33,4 +33,12 @@ export class AuthController{
     return userData
   }
 
+
+
+
+
+  ///////////TOTP (Time Based One-time Password)
+  
+
+
 }
