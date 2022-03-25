@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './api/auth/auth.module';
+import { DeviceModule } from './api/device/device.module';
+import { PlaceModule } from './api/places/places.module';
 import { UserModule } from './api/users/user.module';
 import { AppController } from './app.controller';
 
@@ -15,7 +17,9 @@ import { AppController } from './app.controller';
     // JwtModule.register({ secret: process.env.JWT_SECRET }),
 
     UserModule,
-    AuthModule
+    AuthModule,
+    DeviceModule,
+    PlaceModule
   ],
   controllers: [ AppController],
   providers: [],
