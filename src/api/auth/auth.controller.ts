@@ -34,10 +34,13 @@ export class AuthController{
   }
 
 
+  ////TODO - Global Lgout
+  @UseGuards(JwtGuard)
+  @Get('logout')
+  async logout() {
+    
 
-
-
-  ///////////TOTP (Time Based One-time Password)
+  }
   
 
 

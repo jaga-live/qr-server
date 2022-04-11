@@ -44,16 +44,22 @@ export class AuthService{
         return {
             _id: isUserValid._id,
             token: jwt,
-            role: isUserValid.roles[0]
+            roles: isUserValid.roles,
+            totp_secret: isUserValid.twoFactorAuth.totp
         }
 
     }
 
 
 
+    ////logout
+    async logout( userData) {
+        
+    }
 
 
-    ///////////TOTP (Time Based One-time Password)
+
+    ///////////TOTP (Time Based One-time Password) - PENDING 
     async verify_totp_user(userId: Types.ObjectId, token: string) {
 
         var user: any = await this.userService.view_user_by_id(userId)

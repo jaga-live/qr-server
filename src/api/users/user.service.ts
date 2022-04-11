@@ -31,8 +31,7 @@ export class UserService {
         payload.twoFactorAuth = {
             totp: secret.base32
         }
-        // await this.userModel.insertMany(payload)
-        console.log(secret)
+        await this.userModel.insertMany(payload)
         ////Response Data
         delete payload.password
         delete payload.twoFactorAuth
