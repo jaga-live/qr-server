@@ -45,7 +45,7 @@ export class AuthService{
             _id: isUserValid._id,
             token: jwt,
             roles: isUserValid.roles,
-            totp_secret: isUserValid.twoFactorAuth.totp
+            totp_secret: isUserValid?.twoFactorAuth?.totp
         }
 
     }
