@@ -19,7 +19,7 @@ export class DeviceController{
         @Param('qr') qr: string
     ) {
         
-        return this.deviceService.validate_qr(qr)
+        return this.deviceService.validate_qr(qr, deviceId)
 
     }
 

@@ -17,7 +17,7 @@ export class PlaceService{
     /////Add a place
     async add_place( payload: CreatePlaceDto): Promise<Place> {
         
-        var place = await this.find_user_by_name(payload.name)
+        var place = await this.find_place_by_name(payload.name)
         if(place) throw new ConflictException('Place Already Exists')
 
         var saveData = await this.placeModel.insertMany(payload)
@@ -28,20 +28,27 @@ export class PlaceService{
     
     
 //////VIEW
-    ////Find all Users
-    async view_all_users(): Promise<Place[]> {
+    ////Find all Places
+    async view_all_places(): Promise<Place[]> {
         var place = await this.placeModel.find({})
         return place
     }
 
 
-    ////Find user by name
-    async find_user_by_name(name: string) {
+    ////Find place by name
+    async find_place_by_name(name: string) {
 
         var place = await this.placeModel.findOne({
             name: { $regex: name, $options: 'i'}
         })
 
+        return place
+    }
+
+    /////Get place by Devie ID
+    async find_place_by_deviceid(deviceId: string) {
+        
+        var place = await this.placeModel.findOne({ deviceId })
         return place
     }
     

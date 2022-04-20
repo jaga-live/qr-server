@@ -33,7 +33,7 @@ export class PlaceController{
     @Roles(Role.ADMIN)
     @Get()
     async viewPlace() {
-        return this.placeService.view_all_users()
+        return this.placeService.view_all_places()
     }
 
 
