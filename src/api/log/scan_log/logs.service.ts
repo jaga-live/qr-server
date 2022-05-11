@@ -22,7 +22,8 @@ export class ScanLogsService{
         await this.ScanModel.insertMany({
             deviceId,
             userId,
-            placeId: placeInfo?._id || null
+            placeId: placeInfo?._id || null,
+            status
         })
 
     }

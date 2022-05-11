@@ -18,28 +18,28 @@ export class DeviceService{
         var userId = new Types.ObjectId(qr.split('-')[0])
         var code = qr.split('-')[1]
 
-        var createError: any = {}
+        var createError: any = {};
 
-        if (!userId || code) createError.type = "invalid_qr"
+        if (!userId || !code) createError.type = "invalid_qr"
 
         /////Validate user
         var isuserValid: any = await this.userService.view_user_by_id(new Types.ObjectId(userId))
         if (!isuserValid) createError.type = "invalid_user"
-        
         /////Validate OTP
         var isVerified = speakeasy.totp.verify({
             secret: isuserValid.twoFactorAuth.totp,
             encoding: 'base32',
             token: code
         })
+        
 
         if (!isVerified) createError.type = "invalid_otp"
 
         ////Initiate Scan Logs
-        await this.scanlogService.logScan(deviceId, userId, createError ? createError.type : 'success')
+        await this.scanlogService.logScan(deviceId, userId, Object.keys(createError).length !== 0 ? createError.type : 'success')
         
         /////Throw Errors if any
-        if (createError) throw new BadRequestException('Invalid QR')
+        if (Object.keys(createError).length !== 0) throw new BadRequestException('Invalid QR')
         
         return {
             messgae: 'ok'
