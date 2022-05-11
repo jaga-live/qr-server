@@ -4,11 +4,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './api/auth/auth.module';
 import { DeviceModule } from './api/device/device.module';
-import { LogsModule } from './api/logs/logs.module';
 import { PlaceModule } from './api/places/places.module';
 import { UserModule } from './api/users/user.module';
 import { AppController } from './app.controller';
-import { LogModule } from './api/log/log.module';
+import { LogsModule } from './api/log/log.module';
 
 
 
@@ -23,7 +22,6 @@ import { LogModule } from './api/log/log.module';
     DeviceModule,
     PlaceModule,
     LogsModule,
-    LogModule
   ],
   controllers: [ AppController],
   providers: [],
