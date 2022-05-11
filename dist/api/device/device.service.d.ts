@@ -1,5 +1,5 @@
 import { UserService } from "../users/user.service";
-import { ScanLogsService } from "../logs/scan_log/logs.service";
+import { ScanLogsService } from "src/api/logs/scan_log/logs.service";
 export declare class DeviceService {
     private readonly userService;
     private readonly scanlogService;

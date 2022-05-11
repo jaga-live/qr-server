@@ -2,7 +2,8 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { UserService } from "../users/user.service";
 import * as speakeasy from "speakeasy"
 import { Types } from "mongoose";
-import { ScanLogsService } from "../logs/scan_log/logs.service";
+import { ScanLogsService } from "src/api/logs/scan_log/logs.service";
+
 
 @Injectable()
 export class DeviceService{
