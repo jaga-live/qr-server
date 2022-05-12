@@ -23,7 +23,7 @@ export class AnalyticsController {
 
     ////Scan Count
     var scanCount = await this.adminAnalyticsService.get_scan_count()
-    console.log(scanCount)
+    dashboard = { ...dashboard, scanCount }
     
     return dashboard
   }

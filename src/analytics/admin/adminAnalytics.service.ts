@@ -24,27 +24,39 @@ export class AdminAnalyticsService{
 
     //////Get Success and failure QR scans (Present Day)
     async get_scan_count(): Promise<any> {
-        var d = new Date();
-        d.setHours(0, 0, 0, 0);
+
+        var startTime = new Date();
+        startTime.setHours(0, 0, 0, 0);
+
         var scan_count = await this.scanModel.aggregate([
             {
-                $addFields: {
-                  createdAt: {$toDate: '$createdAt'}  
-                },
-                
+                $match: {
+                    createdAt: {$gte: startTime}
+                }
             },
             {
-                $match: {
-                         createdAt: {$gte: d}
+                $group: {
+                    _id: null,
+                    success: {
+                        $sum: {
+                            $cond: [{ $eq: ['success', '$status'] }, 1, 0]
+                        }
+                    },
+                    failure: {
+                        $sum: {
+                            $cond: [{ $eq: ['success', '$status'] }, 0, 1]
+                        }
+                    }
                 }
+            },
+            {
+                $project: { _id: 0 }
             }
         ])
 
-console.log(new Date('2022-05-11T05:56:41.523+00:00').toLocaleTimeString())
-        var test = await this.scanModel.find({ createdAt: {$gte: new Date(d)}})
-        console.log(test)
 
-        return scan_count
+        return scan_count[0] ? scan_count[0] : { success: 0, failure: 0 }
+
     }
 
 }
