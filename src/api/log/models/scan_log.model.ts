@@ -6,7 +6,7 @@ import { Types } from "mongoose";
 @Schema()
 export class ScanLogs{
 
-    @Prop({ default: new Date()})
+    @Prop()
     createdAt: Date
     
     @Prop()

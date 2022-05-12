@@ -23,7 +23,8 @@ export class ScanLogsService{
             deviceId,
             userId,
             placeId: placeInfo?._id || null,
-            status
+            status,
+            createdAt: new Date()
         })
 
     }

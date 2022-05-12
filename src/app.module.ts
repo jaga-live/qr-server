@@ -8,6 +8,7 @@ import { PlaceModule } from './api/places/places.module';
 import { UserModule } from './api/users/user.module';
 import { AppController } from './app.controller';
 import { LogsModule } from './api/log/log.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 
 
@@ -22,6 +23,7 @@ import { LogsModule } from './api/log/log.module';
     DeviceModule,
     PlaceModule,
     LogsModule,
+    AnalyticsModule,
   ],
   controllers: [ AppController],
   providers: [],
