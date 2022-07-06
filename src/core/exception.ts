@@ -7,8 +7,6 @@ import {
 } from '@nestjs/common';
 
 
-
-
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   
@@ -31,9 +29,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
       : "Internal Server Error";
     
     
-    /////Error Log - All Environment Environment
+    /////Error Log - All Environment
     console.log(exception)
-    
     
     ////Response - Client
     response.status(status).json({

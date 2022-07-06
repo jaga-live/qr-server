@@ -6,6 +6,7 @@ import { AllExceptionsFilter } from './core/exception';
 async function server() {
 
   const app = await NestFactory.create(AppModule);
+  ///App Config
   app.enableCors()
   app.setGlobalPrefix('v1', {
     exclude: ['/']
@@ -17,7 +18,6 @@ async function server() {
 
   await app.listen(5000);
 
-
-
 }
+
 server();

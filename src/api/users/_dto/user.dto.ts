@@ -3,8 +3,6 @@ import { Exclude } from "class-transformer"
 import {IsNotEmpty, IsString, IsEmail, IsOptional, IsArray} from "class-validator"
 import { Types } from "mongoose"
 
-
-
 /////CREATE
 export class CreateUserDto{
 
@@ -34,16 +32,11 @@ export class CreateUserDto{
 }
 
 
-
 ///////VIEW
 export class UserProfileDto{
-
     _id: Types.ObjectId
-
     name: string
-
     email: string
-
 }
 
 

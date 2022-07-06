@@ -26,8 +26,5 @@ export class ScanLogsService{
             status,
             createdAt: new Date()
         })
-
     }
-
-
 }
